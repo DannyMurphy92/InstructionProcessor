@@ -51,6 +51,7 @@
     <Compile Include="Extensions\InstructionDictionaryExtensionsTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\ActionStrategies\ValueStrategyTests.cs" />
+    <Compile Include="Services\Factories\ActionStrategyFactoryTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

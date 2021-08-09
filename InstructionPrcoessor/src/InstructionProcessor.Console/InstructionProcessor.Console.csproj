@@ -49,6 +49,8 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\ActionStrategies\Interfaces\IActionStrategy.cs" />
     <Compile Include="Services\ActionStrategies\ValueStrategy.cs" />
+    <Compile Include="Services\Factories\ActionStrategyFactory.cs" />
+    <Compile Include="Services\Factories\Interfaces\IActionStrategyFactory.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
