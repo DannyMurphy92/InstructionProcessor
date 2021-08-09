@@ -1,5 +1,6 @@
 ﻿using InstructionProcessor.Console.Services.ActionStrategies.Interfaces;
 using InstructionProcessor.Console.Services.Factories;
+using NSubstitute;
 using NUnit.Framework;
 using System;
 using System.Collections.Generic;
@@ -24,7 +25,8 @@ namespace InstructionProcess.Console.UnitTests.Services.Factories
         [Test]
         public void Get_MatchesCorrectStrategyByName()
         {
-            var dummyStrat = new MyDummyStrategy();
+            var dummyStrat = Substitute.For<IActionStrategy>();
+            dummyStrat.Name.Returns("test-strategy");
             var sut = new ActionStrategyFactory(new List<IActionStrategy> { dummyStrat });
 
             var returnedStrat = sut.GetStrategy("test-strategy");
@@ -33,13 +35,5 @@ namespace InstructionProcess.Console.UnitTests.Services.Factories
         }
     }
 
-    internal class MyDummyStrategy : IActionStrategy
-    {
-        public string Name => "Test-Strategy";
-
-        public int Evaluate(IEnumerable<int> inputs)
-        {
-            throw new NotImplementedException();
-        }
-    }
+    
 }
