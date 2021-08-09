@@ -20,8 +20,8 @@ namespace InstructionProcessor.Console.Services.ActionStrategies
             inputs.ToList().ForEach(input =>
             {
                 var instruction = instructionDictionary[input];
-                var x = instruction.Evaluate(instructionDictionary, actionFactory);
-                result = result * x;
+                var instructionResult = instruction.Evaluate(instructionDictionary, actionFactory);
+                result = result * instructionResult;
             });
 
             return result;
