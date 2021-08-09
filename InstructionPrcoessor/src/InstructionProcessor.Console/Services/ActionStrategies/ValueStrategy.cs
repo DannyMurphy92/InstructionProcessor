@@ -1,4 +1,6 @@
-﻿using InstructionProcessor.Console.Services.ActionStrategies.Interfaces;
+﻿using InstructionProcessor.Console.Models;
+using InstructionProcessor.Console.Services.ActionStrategies.Interfaces;
+using InstructionProcessor.Console.Services.Factories.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,7 +11,7 @@ namespace InstructionProcessor.Console.Services.ActionStrategies
     {
         public string Name => "VALUE";
 
-        public int Evaluate(IEnumerable<int> inputs)
+        public int Evaluate(IEnumerable<int> inputs, IDictionary<int, Instruction> instructionDictionary, IActionStrategyFactory actionFactory)
         {
             if (inputs.Count() != 1)
             {

@@ -1,4 +1,6 @@
-﻿using System;
+﻿using InstructionProcessor.Console.Models;
+using InstructionProcessor.Console.Services.Factories.Interfaces;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,6 +12,6 @@ namespace InstructionProcessor.Console.Services.ActionStrategies.Interfaces
     {
         string Name { get; }
 
-        int Evaluate(IEnumerable<int> inputs);
+        int Evaluate(IEnumerable<int> inputs, IDictionary<int, Instruction> instructionDictionary, IActionStrategyFactory actionFactory);
     }
 }

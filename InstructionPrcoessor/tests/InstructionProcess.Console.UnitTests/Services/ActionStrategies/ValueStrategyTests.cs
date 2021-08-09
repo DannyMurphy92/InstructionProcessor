@@ -23,7 +23,7 @@ namespace InstructionProcess.Console.UnitTests.Services.ActionStrategies
         {
             var sut = new ValueStrategy();
 
-            Assert.AreEqual(10, sut.Evaluate(new[] { 10 }));
+            Assert.AreEqual(10, sut.Evaluate(new[] { 10 }, null, null));
         }
 
         [Test]
@@ -31,7 +31,7 @@ namespace InstructionProcess.Console.UnitTests.Services.ActionStrategies
         {
             var sut = new ValueStrategy();
 
-            var ex = Assert.Throws<ArgumentException>(() => sut.Evaluate(new[] { 10, 11 }));
+            var ex = Assert.Throws<ArgumentException>(() => sut.Evaluate(new[] { 10, 11 }, null, null));
             Assert.AreEqual("Value instruction must only be given a single value", ex.Message);
         }
     }

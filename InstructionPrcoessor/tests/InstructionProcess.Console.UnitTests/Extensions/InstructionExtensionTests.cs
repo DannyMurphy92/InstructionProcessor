@@ -16,11 +16,13 @@ namespace InstructionProcess.Console.UnitTests.Extensions
     public class InstructionExtensionTests
     {
         private IActionStrategyFactory actionFactory;
+        private IDictionary<int, Instruction> instructionDictionary;
 
         [SetUp]
         public void SetUp()
         {
             actionFactory = Substitute.For<IActionStrategyFactory>();
+            instructionDictionary = new Dictionary<int, Instruction>();
         }
 
         [Test]
@@ -31,7 +33,7 @@ namespace InstructionProcess.Console.UnitTests.Extensions
                 Action = "test-action"
             };
 
-            sut.Evaluate(actionFactory);
+            sut.Evaluate(instructionDictionary, actionFactory);
 
             actionFactory.Received(1).GetStrategy("test-action");
         }
@@ -40,7 +42,7 @@ namespace InstructionProcess.Console.UnitTests.Extensions
         public void Evaluate_ReturnsResultFromActionStrategy()
         {
             var strategy = Substitute.For<IActionStrategy>();
-            strategy.Evaluate(default).ReturnsForAnyArgs(10);
+            strategy.Evaluate(default, default, default).ReturnsForAnyArgs(10);
             var sut = new Instruction
             {
                 Action = "test-action",
@@ -48,9 +50,9 @@ namespace InstructionProcess.Console.UnitTests.Extensions
             };
 
             actionFactory.GetStrategy(default).ReturnsForAnyArgs(strategy);
-            var result = sut.Evaluate(actionFactory);
+            var result = sut.Evaluate(instructionDictionary, actionFactory);
 
-            strategy.Received(1).Evaluate(sut.Values);
+            strategy.Received(1).Evaluate(sut.Values, instructionDictionary, actionFactory);
             Assert.AreEqual(10, result);
         }
     }

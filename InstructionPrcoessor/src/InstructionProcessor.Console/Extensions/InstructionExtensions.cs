@@ -12,11 +12,12 @@ namespace InstructionProcessor.Console.Extensions
     {
         public static int Evaluate(
             this Instruction instruction,
+            IDictionary<int, Instruction> instructionDictionary,
             IActionStrategyFactory actionFactory)
         {
             var action = actionFactory.GetStrategy(instruction.Action);
 
-            return action.Evaluate(instruction.Values);
+            return action.Evaluate(instruction.Values, instructionDictionary, actionFactory);
         }
     }
 }
