@@ -30,7 +30,8 @@ namespace InstructionProcess.Console.UnitTests.Extensions
         {
             var sut = new Instruction
             {
-                Action = "test-action"
+                Action = "test-action",
+                Values = new int[] { },
             };
 
             sut.Evaluate(instructionDictionary, actionFactory);
