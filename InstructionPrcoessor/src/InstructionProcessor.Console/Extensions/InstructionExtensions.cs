@@ -15,9 +15,14 @@ namespace InstructionProcessor.Console.Extensions
             IDictionary<int, Instruction> instructionDictionary,
             IActionStrategyFactory actionFactory)
         {
-            var action = actionFactory.GetStrategy(instruction.Action);
+            if (!instruction.EvalutatedResult.HasValue)
+            {
+                var action = actionFactory.GetStrategy(instruction.Action);
 
-            return action.Evaluate(instruction.Values, instructionDictionary, actionFactory);
+                instruction.EvalutatedResult = action.Evaluate(instruction.Values, instructionDictionary, actionFactory);
+            }
+
+            return instruction.EvalutatedResult.Value;
         }
     }
 }

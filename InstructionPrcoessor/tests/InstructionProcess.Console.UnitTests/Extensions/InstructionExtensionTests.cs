@@ -39,7 +39,7 @@ namespace InstructionProcess.Console.UnitTests.Extensions
         }
 
         [Test]
-        public void Evaluate_ReturnsResultFromActionStrategy()
+        public void Evaluate_ReturnsResultFromActionStrategy_AndCachesResult()
         {
             var strategy = Substitute.For<IActionStrategy>();
             strategy.Evaluate(default, default, default).ReturnsForAnyArgs(10);
@@ -54,6 +54,23 @@ namespace InstructionProcess.Console.UnitTests.Extensions
 
             strategy.Received(1).Evaluate(sut.Values, instructionDictionary, actionFactory);
             Assert.AreEqual(10, result);
+            Assert.AreEqual(10, sut.EvalutatedResult);
+        }
+
+        [Test]
+        public void Evaluate_HasCachedResult_ReturnCachedResultDoesNotPerformOtherActions()
+        {
+            var sut = new Instruction
+            {
+                Action = "test-action",
+                EvalutatedResult = 5,
+            };
+
+            var result = sut.Evaluate(instructionDictionary, actionFactory);
+
+            actionFactory.DidNotReceiveWithAnyArgs().GetStrategy(default);
+
+            Assert.AreEqual(5, result);
         }
     }
 }

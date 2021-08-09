@@ -8,8 +8,8 @@ namespace InstructionProcessor.Console.Models
 {
     public class Instruction
     {
+        public int? EvalutatedResult { get; set; } = null;
         public string Action { get; set; }
         public IEnumerable<int> Values { get; set; }
-
     }
 }
